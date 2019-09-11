@@ -25,6 +25,7 @@ procedure ValidacionFecha(var Fecha:string; Var AuxY:Integer; var AuxX:integer);
 
 var AnioPC,MesPC,DiaPC,CaseDia:word;
 	AuxA,AuxM,AuxD:LongInt;
+    fechaaux:string;
 
 Begin
 (AnioPC):=(0);
@@ -109,7 +110,19 @@ while ((AuxA=AnioPC) and (AuxM=MesPC) and (AuxD<DiaPC)) or (AuxD>31) or (AuxD<1)
 	Inc(AuxY);
 	DesfaceVertical(AuxY);
 	end;
-Fecha:=(IntToStr(AuxA)+'/'+IntToStr(AuxM)+'/'+IntToStr(AuxD));
+    Fecha := IntToStr(AuxA)+ '/';
+    if(length(IntToStr(AuxM))=1) then
+         fechaaux := '0'+IntToStr(AuxM)
+    else
+         fechaaux := IntToStr(AuxM);
+    Fecha := Fecha+fechaaux+'/';
+    if(length(IntToStr(AuxD))=1) then
+         fechaaux := '0'+IntToStr(AuxD)
+    else
+         fechaaux := IntToStr(AuxD);
+    Fecha := Fecha+fechaaux;
+
+//Fecha:=(+'/'+IntToStr(AuxM)+'/'+IntToStr(AuxD));
 textcolor(green);
 gotoxy(AuxX,AuxY);
 WriteLn('La fecha ',Fecha,' Fue registrada con exito.');
